@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>ADG3</Name>
+    <LastWriteTime>2020-05-15T16:04:40.21055Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+    <Salt>gyPaUVuk</Salt>
+    <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA1/R7kv6epkW+KSzdvfNetAAAAAACAAAAAAADZgAAwAAAABAAAABkh399Lv+F/p9l2JMkwxURAAAAAASAAACgAAAAEAAAAKYNuLKFOkMPAkPuYA4M2D0oAAAAlhxmyXDPSvUwNy/rxYZ2xZk1/ZLJcND4DUemvRTRZMXSlGukk9ffuBQAAABDYAtXwXBCWEI/VWdWr7hga5xm+w==</LastKnownProtectedHashedPassword>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>ImportResales.dtsx</Name>
+      <LastWriteTime>2020-02-19T07:33:07.7515699Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+      <Salt>p9kjjXys</Salt>
+      <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA1/R7kv6epkW+KSzdvfNetAAAAAACAAAAAAADZgAAwAAAABAAAAA0t/QhZ4eHb9+BCZufVqU4AAAAAASAAACgAAAAEAAAAIw5rUcQDgBRiq/ud6NCYjUoAAAA0nRbNisOH9LIKNSwLMmcN1mStXmMhGsrcG/AThN8ruzgDeDIANafgRQAAACIqkQL5Dx73cYXXAzTzo3Maw6XqQ==</LastKnownProtectedHashedPassword>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ImportDomestic.dtsx</Name>
+      <LastWriteTime>2020-02-19T07:33:10.094725Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+      <Salt>c39Td5X6</Salt>
+      <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA1/R7kv6epkW+KSzdvfNetAAAAAACAAAAAAADZgAAwAAAABAAAAClzrG1F9kXkBSsgI31/HvkAAAAAASAAACgAAAAEAAAAOfGcxBWU/tzewdBNw5dOjIoAAAA7DWVItiO1o9NttvzN2O8zmzQHqJ3+tlIVQHj38tRMhfhKBOeHIq0YhQAAADC51dDu0cKpVGppuM12gnEemfozA==</LastKnownProtectedHashedPassword>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ImportAvgCost.dtsx</Name>
+      <LastWriteTime>2020-05-15T16:04:40.1754741Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+      <Salt>+vHPzYo0</Salt>
+      <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA1/R7kv6epkW+KSzdvfNetAAAAAACAAAAAAADZgAAwAAAABAAAABr27vnL197hSlutiMljaQ/AAAAAASAAACgAAAAEAAAABHKPpSjM1VQEDqA+71OSoooAAAA49ZSPkpahZDFtqb+TBt+zLbze3/chJCbC6hmwvGAbdboQ4G2Bg4SLhQAAADtQVR4SxvcUf13uOeqZACYfzRknA==</LastKnownProtectedHashedPassword>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>

@@ -1,0 +1,1991 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/26/2019 9:11:37 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="2IT0-CBT-D73HSK"
+  DTS:CreatorName="THAIUNION\FO5910362"
+  DTS:DTSID="{634B3DA4-AB7E-4DDA-B843-5905AC6D8060}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="160"
+  DTS:VersionGUID="{25A4EFC7-2893-46F3-9AD3-6BF3873D7963}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{99FD957A-AB0D-4C1D-B502-02E79204C01B}"
+      DTS:ObjectName="datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=datawarehouse.thaiunion.com;User ID=antidpadm;Initial Catalog=TU_BI_ANTI_DUMPING;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="ah+Hl5LJXQ=="
+            IV="bOI0iP57MK4=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>bOI0iP57MK637whmJZMt2+GYyhHT56NZRpY1w4CAXSZqdV4wuSrSLAw8pdHQCrVDyI1Z1dGmgJStLB5zkgHC4KU5SMKEueKx1YSsAjakRHBXbhhfs2Mwzn9g/UhmYzGjxOAykiMPzqErsbhMX/zZsLFbLgvMairwevuaUbrCAkw=</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{540AB3D7-A266-4890-89D8-97E831DFB482}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[User::InputFolderCOST]+ @[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\DATA\FTP\DATA\ANTIDUMPING\F_AVG_COST\Avg_cost.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2C8A42DE-7927-4180-B8AC-9AEBEFBC60D1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchivedFolderCOST">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\DATA\FTP\DATA\ANTIDUMPING\F_AVG_COST\ARCHIVED\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9EF1C729-1A10-4046-9EA5-A1D6593DBCD3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ArchivedFolderCOST]+ REPLACE( @[User::FileName] , &quot;.xlsx&quot;,&quot;_&quot; )+ (DT_WSTR, 4) DATEPART(&quot;YYYY&quot;,GETDATE())+(DT_WSTR, 2) DATEPART(&quot;MM&quot;,GETDATE())+(DT_WSTR, 2) DATEPART(&quot;DD&quot;,GETDATE())+&quot;_&quot;+(DT_WSTR, 2) DATEPART(&quot;hh&quot;,GETDATE())+(DT_WSTR, 2) DATEPART(&quot;mm&quot;,GETDATE())+(DT_WSTR, 2) DATEPART(&quot;ss&quot;,GETDATE())+&quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchivedFullPathCOST">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\DATA\FTP\DATA\ANTIDUMPING\F_AVG_COST\ARCHIVED\Avg_cost_2020515_23529.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E076CD79-CF15-43A5-B79D-2041C748FB24}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">Avg_cost.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{843FC08D-35D9-4EF8-AE8B-594789BE066D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="InputFolderCOST">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\DATA\FTP\DATA\ANTIDUMPING\F_AVG_COST\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A75A542F-CDFA-4786-841A-F059C315FC6B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::InputFolderCOST]+ @[User::FileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="InputFullPathCOST">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\DATA\FTP\DATA\ANTIDUMPING\F_AVG_COST\Avg_cost.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{99879291-F827-425F-881F-F2660C52375A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FD292EF5-E7D0-4C14-B15F-36DA91DA5FDB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordUpdated">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE71DDC6-B30A-4332-9F24-1E985F328CF3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFile">
+      <DTS:VariableValue
+        DTS:DataType="8">Avg_cost.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach File In folder"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{C17250BD-3A08-4A42-B039-AD0D6B52D535}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach File In folder">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="DTS.ForEachFileEnumerator.3"
+        DTS:DTSID="{C459052B-812C-4AAF-B900-D446BB78F5D2}"
+        DTS:ObjectName="{C459052B-812C-4AAF-B900-D446BB78F5D2}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::InputFolderCOST]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="D:\DATA\FTP\DATA\ANTIDUMPING\F_AVG_COST\" />
+            <FEFEProperty
+              FileSpec="*.*" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{B44452F6-72EB-4014-96A6-BA2CF0A2C320}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="LoadStatusFlg">
+          <DTS:VariableValue
+            DTS:DataType="2">0</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\Copy File"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="File System Task"
+          DTS:DTSID="{CD94DE88-D09C-4FD0-9C4F-64C1CCD221A5}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Copy File"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::InputFullPathCOST"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::ArchivedFullPathCOST"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\Data Flow Task"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{6F531AE1-D31F-4586-AE03-305BD39762B8}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach File In folder\Data Flow Task\Conditional Split"
+                  componentClassID="DTSTransform.ConditionalSplit.3"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Conditional Split"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[CONNUM]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="CONNUM"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Null_data]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Null_data"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">[ISNULL](#{Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]}) ==  TRUE </property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(CONNUM) ==  TRUE </property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Has_data]"
+                      description="Output 2 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Has_data"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">[ISNULL](#{Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]}) ==  FALSE </property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(CONNUM) ==  FALSE </property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">1</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach File In folder\Data Flow Task\Data Conversion"
+                  componentClassID="DTSTransform.DataConvert.3"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[OKF]"
+                          cachedDataType="r8"
+                          cachedName="OKF"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OKF]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[TUF]"
+                          cachedDataType="r8"
+                          cachedName="TUF"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUF]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[TUS]"
+                          cachedDataType="r8"
+                          cachedName="TUS"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUS]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[AVG_COST_BAHT_LBS]"
+                          cachedDataType="r8"
+                          cachedName="AVG_COST_BAHT_LBS"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_BAHT_LBS]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_OKF]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_OKF]"
+                          name="dc_OKF"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OKF]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_TUF]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_TUF]"
+                          name="dc_TUF"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUF]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_TUS]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_TUS]"
+                          name="dc_TUS"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUS]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_AVG_COST_BAHT_LBS]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[dc_AVG_COST_BAHT_LBS]"
+                          name="dc_AVG_COST_BAHT_LBS"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_BAHT_LBS]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Avg_Cost"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[I_AVG_COST]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">true</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm]"
+                      connectionManagerRefId="Package.ConnectionManagers[datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].Columns[CONNUM]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="CONNUM"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[CONNUM]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].Columns[OKF]"
+                          cachedDataType="r8"
+                          cachedName="OKF"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[OKF]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OKF]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].Columns[TUF]"
+                          cachedDataType="r8"
+                          cachedName="TUF"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[TUF]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUF]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].Columns[TUS]"
+                          cachedDataType="r8"
+                          cachedName="TUS"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[TUS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUS]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].Columns[AVG_COST_BAHT_LBS]"
+                          cachedDataType="r8"
+                          cachedName="AVG_COST_BAHT_LBS"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[AVG_COST_BAHT_LBS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_BAHT_LBS]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].Columns[Exchange_Rate]"
+                          cachedDataType="r8"
+                          cachedName="Exchange_Rate"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[Exchange_Rate]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Exchange_Rate]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].Columns[AVG_COST_Dollar_LBS]"
+                          cachedDataType="r8"
+                          cachedName="AVG_COST_Dollar_LBS"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[AVG_COST_Dollar_LBS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_Dollar_LBS]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[CONNUM]"
+                          dataType="wstr"
+                          length="255"
+                          name="CONNUM" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[OKF]"
+                          dataType="r8"
+                          name="OKF" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[TUF]"
+                          dataType="r8"
+                          name="TUF" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[TUS]"
+                          dataType="r8"
+                          name="TUS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[AVG_COST_BAHT_LBS]"
+                          dataType="r8"
+                          name="AVG_COST_BAHT_LBS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[Exchange_Rate]"
+                          dataType="r8"
+                          name="Exchange_Rate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input].ExternalColumns[AVG_COST_Dollar_LBS]"
+                          dataType="r8"
+                          name="AVG_COST_Dollar_LBS" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging"
+                  componentClassID="DTSAdapter.OLEDBDestination.3"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Destination - Avg_Cost_Staging"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[I_AVG_COST_stg]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">true</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm]"
+                      connectionManagerRefId="Package.ConnectionManagers[datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].Columns[CONNUM]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="CONNUM"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[CONNUM]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].Columns[OKF]"
+                          cachedDataType="r8"
+                          cachedName="OKF"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[OKF]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OKF]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].Columns[TUF]"
+                          cachedDataType="r8"
+                          cachedName="TUF"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[TUF]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUF]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].Columns[TUS]"
+                          cachedDataType="r8"
+                          cachedName="TUS"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[TUS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUS]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].Columns[AVG_COST_BAHT_LBS]"
+                          cachedDataType="r8"
+                          cachedName="AVG_COST_BAHT_LBS"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[AVG_COST_BAHT_LBS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_BAHT_LBS]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].Columns[Exchange_Rate]"
+                          cachedDataType="r8"
+                          cachedName="Exchange_Rate"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[Exchange_Rate]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Exchange_Rate]" />
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].Columns[AVG_COST_Dollar_LBS]"
+                          cachedDataType="r8"
+                          cachedName="AVG_COST_Dollar_LBS"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[AVG_COST_Dollar_LBS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_Dollar_LBS]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[CONNUM]"
+                          dataType="wstr"
+                          length="255"
+                          name="CONNUM" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[OKF]"
+                          dataType="r8"
+                          name="OKF" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[TUF]"
+                          dataType="r8"
+                          name="TUF" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[TUS]"
+                          dataType="r8"
+                          name="TUS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[AVG_COST_BAHT_LBS]"
+                          dataType="r8"
+                          name="AVG_COST_BAHT_LBS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[Exchange_Rate]"
+                          dataType="r8"
+                          name="Exchange_Rate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input].ExternalColumns[AVG_COST_Dollar_LBS]"
+                          dataType="r8"
+                          name="AVG_COST_Dollar_LBS" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach File In folder\Data Flow Task\Excel Source"
+                  componentClassID="DTSAdapter.ExcelSource.3"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">Sheet1$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable">User::SheetName1</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[CONNUM]"
+                          length="255"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]"
+                          name="CONNUM"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OKF]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[OKF]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OKF]"
+                          name="OKF"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUF]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[TUF]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUF]"
+                          name="TUF"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUS]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[TUS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[TUS]"
+                          name="TUS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_BAHT_LBS]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[AVG_COST_BAHT_LBS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_BAHT_LBS]"
+                          name="AVG_COST_BAHT_LBS"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Exchange_Rate]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Exchange_Rate]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Exchange_Rate]"
+                          name="Exchange_Rate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_Dollar_LBS]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[AVG_COST_Dollar_LBS]"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[AVG_COST_Dollar_LBS]"
+                          name="AVG_COST_Dollar_LBS"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[CONNUM]"
+                          dataType="wstr"
+                          length="255"
+                          name="CONNUM" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[OKF]"
+                          dataType="r8"
+                          name="OKF" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[TUF]"
+                          dataType="r8"
+                          name="TUF" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[TUS]"
+                          dataType="r8"
+                          name="TUS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[AVG_COST_BAHT_LBS]"
+                          dataType="r8"
+                          name="AVG_COST_BAHT_LBS" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Exchange_Rate]"
+                          dataType="r8"
+                          name="Exchange_Rate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[AVG_COST_Dollar_LBS]"
+                          dataType="r8"
+                          name="AVG_COST_Dollar_LBS" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[CONNUM]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[CONNUM]"
+                          name="CONNUM" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[OKF]"
+                          dataType="r8"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[OKF]"
+                          name="OKF" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[TUF]"
+                          dataType="r8"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[TUF]"
+                          name="TUF" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[TUS]"
+                          dataType="r8"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[TUS]"
+                          name="TUS" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[AVG_COST_BAHT_LBS]"
+                          dataType="r8"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[AVG_COST_BAHT_LBS]"
+                          name="AVG_COST_BAHT_LBS" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Exchange_Rate]"
+                          dataType="r8"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Exchange_Rate]"
+                          name="Exchange_Rate" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[AVG_COST_Dollar_LBS]"
+                          dataType="r8"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[AVG_COST_Dollar_LBS]"
+                          name="AVG_COST_Dollar_LBS" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach File In folder\Data Flow Task\Lookup"
+                  componentClassID="DTSTransform.Lookup.3"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[I_AVG_COST]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[I_AVG_COST]) [refTable]
+where [refTable].[CONNUM] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">50</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CONNUM" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OKF" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TUF" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TUS" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AVG_COST_BAHT_LBS" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Exchange_Rate" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AVG_COST_Dollar_LBS" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach File In folder\Data Flow Task\Lookup.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm]"
+                      connectionManagerRefId="Package.ConnectionManagers[datawarehouse.thaiunion.com.TU_BI_ANTI_DUMPING.antidpadm]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach File In folder\Data Flow Task\Lookup.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Lookup.Inputs[Lookup Input].Columns[CONNUM]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="CONNUM"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CONNUM]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">CONNUM</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach File In folder\Data Flow Task\Row Count"
+                  componentClassID="DTSTransform.RowCount.3"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RecordInserted</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach File In folder\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach File In folder\Data Flow Task\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Foreach File In folder\Data Flow Task\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach File In folder\Data Flow Task.Paths[Data Conversion Output]"
+                  endId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Foreach File In folder\Data Flow Task.Paths[Excel Source Output]"
+                  endId="Package\Foreach File In folder\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Excel Source Output"
+                  startId="Package\Foreach File In folder\Data Flow Task\Excel Source.Outputs[Excel Source Output]" />
+                <path
+                  refId="Package\Foreach File In folder\Data Flow Task.Paths[Has_data]"
+                  endId="Package\Foreach File In folder\Data Flow Task\Lookup.Inputs[Lookup Input]"
+                  name="Has_data"
+                  startId="Package\Foreach File In folder\Data Flow Task\Conditional Split.Outputs[Has_data]" />
+                <path
+                  refId="Package\Foreach File In folder\Data Flow Task.Paths[Lookup Match Output]"
+                  endId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging.Inputs[Destination Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Foreach File In folder\Data Flow Task.Paths[Lookup No Match Output]"
+                  endId="Package\Foreach File In folder\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                  name="Lookup No Match Output"
+                  startId="Package\Foreach File In folder\Data Flow Task\Lookup.Outputs[Lookup No Match Output]" />
+                <path
+                  refId="Package\Foreach File In folder\Data Flow Task.Paths[Row Count Output 1]"
+                  endId="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost.Inputs[Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Foreach File In folder\Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\DELETE FILE"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{B01D4E3B-90EB-4B63-B35A-0798DDB471D7}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DELETE FILE"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteFile"
+              OperationName="Delete Source File"
+              TaskSourcePath="User::InputFullPathCOST"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\Insert Log and Truncate"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{46EEF0CF-657F-4716-BCE0-2A90930FB816}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Insert Log and Truncate"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"insert into SYS_PROD_UP_HIST
+ select '"+ @[User::InputFullPathCOST] +"',"+ (DT_WSTR, 12)@[User::RecordInserted] +","+ (DT_WSTR, 12) @[User::RecordUpdated] +",getdate() GO"+" truncate table [dbo].[I_AVG_COST_stg]"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{99FD957A-AB0D-4C1D-B502-02E79204C01B}"
+              SQLTask:SqlStatementSource="insert into SYS_PROD_UP_HIST&#xA; select 'D:\DATA\FTP\DATA\ANTIDUMPING\F_AVG_COST\Avg_cost.xlsx',0,0,getdate() GO truncate table [dbo].[I_AVG_COST_stg]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\Truncate Table I_AVG_COST_FINAL"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9C8CBB16-F268-4557-9DA6-F94A2555F6A8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Table I_AVG_COST_FINAL"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{99FD957A-AB0D-4C1D-B502-02E79204C01B}"
+              SQLTask:SqlStatementSource="truncate table [dbo].[I_AVG_COST_FINAL]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\UNION ALL"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F6BCD8FD-A827-43BB-AD71-FFA729467D25}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="UNION ALL"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{99FD957A-AB0D-4C1D-B502-02E79204C01B}"
+              SQLTask:SqlStatementSource="INSERT INTO [TU_BI_ANTI_DUMPING].[dbo].[I_AVG_COST_FINAL] ([ID]&#xA;&#x9;  ,[CONNUM]&#xA;      ,[COST]&#xA;      ,[AVG_COST_BAHT_LBS]&#xA;      ,[Exchange_Rate]&#xA;      ,[AVG_COST_Dollar_LBS]&#xA;&#x9;  ,[COMPANY])&#xA;SELECT [ID]&#xA;&#x9;&#x9;,[CONNUM]&#xA;&#x9;&#x9;,[COST]&#xA;&#x9;&#x9;,[AVG_COST_BAHT_LBS]&#xA;&#x9;&#x9;,[Exchange_Rate]&#xA;&#x9;&#x9;,[AVG_COST_Dollar_LBS]&#xA;&#x9;&#x9;,[COMPANY]&#xA;FROM [TU_BI_ANTI_DUMPING].[dbo].[v_COST_OKF] UNION ALL&#xA;SELECT [ID]&#xA;&#x9;&#x9;,[CONNUM]&#xA;&#x9;&#x9;,[COST]&#xA;&#x9;&#x9;,[AVG_COST_BAHT_LBS]&#xA;&#x9;&#x9;,[Exchange_Rate]&#xA;&#x9;&#x9;,[AVG_COST_Dollar_LBS]&#xA;&#x9;&#x9;,[COMPANY]&#xA;FROM [TU_BI_ANTI_DUMPING].[dbo].[v_COST_TUF] UNION ALL&#xA;SELECT [ID]&#xA;&#x9;&#x9;,[CONNUM]&#xA;&#x9;&#x9;,[COST]&#xA;&#x9;&#x9;,[AVG_COST_BAHT_LBS]&#xA;&#x9;&#x9;,[Exchange_Rate]&#xA;&#x9;&#x9;,[AVG_COST_Dollar_LBS]&#xA;&#x9;&#x9;,[COMPANY]&#xA;FROM [TU_BI_ANTI_DUMPING].[dbo].[v_COST_TUS];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\Update Log 1"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{76C7291C-6598-47C6-AA16-7D392B9608F2}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Log 1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"insert into SYS_PROD_INFO_HIST select 'AVG COST FILE LOAD (updated:"+ (DT_WSTR,20)@[User::RecordUpdated] +")' ,'"+ @[User::FileName] +"',"+ (DT_WSTR,20)@[User::RecordInserted] + "
+ ,getdate(),"+ (DT_WSTR,1)@[User::LoadStatusFlg]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{99FD957A-AB0D-4C1D-B502-02E79204C01B}"
+              SQLTask:SqlStatementSource="insert into SYS_PROD_INFO_HIST select 'AVG COST FILE LOAD (updated:0)' ,'Avg_cost.xlsx',0&#xA; ,getdate(),0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach File In folder\Update Staging to Initial for OKF"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{346EDB7B-C955-419F-B857-BDBCAE47800D}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Staging to Initial for OKF"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"update a
+ set a.[CONNUM] = b.[CONNUM]
+      ,a.[OKF] = b.[OKF]
+      ,a.[TUF] = b.[TUF]
+      ,a.[TUS] = b.[TUS]
+      ,a.[AVG_COST_BAHT_LBS] = b.[AVG_COST_BAHT_LBS]
+      ,a.[Exchange_Rate] = b.[Exchange_Rate]
+      ,a.[AVG_COST_Dollar_LBS] = b.[AVG_COST_Dollar_LBS]
+ from [dbo].[I_AVG_COST] a inner join [dbo].[I_AVG_COST_stg] b
+on a.CONNUM = b.CONNUM
+select @@rowcount"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{99FD957A-AB0D-4C1D-B502-02E79204C01B}"
+              SQLTask:SqlStatementSource="update a&#xA; set a.[CONNUM] = b.[CONNUM]&#xA;      ,a.[OKF] = b.[OKF]&#xA;      ,a.[TUF] = b.[TUF]&#xA;      ,a.[TUS] = b.[TUS]&#xA;      ,a.[AVG_COST_BAHT_LBS] = b.[AVG_COST_BAHT_LBS]&#xA;      ,a.[Exchange_Rate] = b.[Exchange_Rate]&#xA;      ,a.[AVG_COST_Dollar_LBS] = b.[AVG_COST_Dollar_LBS]&#xA; from [dbo].[I_AVG_COST] a inner join [dbo].[I_AVG_COST_stg] b&#xA;on a.CONNUM = b.CONNUM&#xA;select @@rowcount"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RecordUpdated" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach File In folder.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5B8F458D-E434-47C7-869C-C8D81CF807CA}"
+          DTS:From="Package\Foreach File In folder\Insert Log and Truncate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach File In folder\Copy File" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach File In folder.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{1A04CF71-B29C-4987-9CAB-DEA0C1B16BFD}"
+          DTS:From="Package\Foreach File In folder\DELETE FILE"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach File In folder\Truncate Table I_AVG_COST_FINAL" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach File In folder.PrecedenceConstraints[Constraint 1 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{BE51A125-EDD6-483B-85EA-D224BFFCB16A}"
+          DTS:From="Package\Foreach File In folder\Update Staging to Initial for OKF"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1 1"
+          DTS:To="Package\Foreach File In folder\Insert Log and Truncate" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach File In folder.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{E32A50BD-3677-429C-B1AD-808EE992BB45}"
+          DTS:From="Package\Foreach File In folder\Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Foreach File In folder\Update Staging to Initial for OKF" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach File In folder.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{FF50F79B-C921-4269-B76E-55A0206513AB}"
+          DTS:From="Package\Foreach File In folder\Truncate Table I_AVG_COST_FINAL"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Foreach File In folder\UNION ALL" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach File In folder.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{C1ABB4EB-B178-44DE-A338-C4E0C621248C}"
+          DTS:From="Package\Foreach File In folder\Copy File"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Foreach File In folder\Update Log 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach File In folder.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{50F9F757-4E8D-4160-AE6A-22B694FFD7C2}"
+          DTS:From="Package\Foreach File In folder\Update Log 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Foreach File In folder\DELETE FILE" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{841E0146-D1E3-4753-B967-C03A98F4F51E}"
+          DTS:ObjectName="{841E0146-D1E3-4753-B967-C03A98F4F51E}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Foreach File In folder\Copy File"
+          TopLeft="107,344" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Foreach File In folder\Data Flow Task"
+          TopLeft="83,26" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\Foreach File In folder\DELETE FILE"
+          TopLeft="115,523" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Foreach File In folder\Insert Log and Truncate"
+          TopLeft="67,233" />
+        <NodeLayout
+          Size="309,42"
+          Id="Package\Foreach File In folder\Truncate Table I_AVG_COST_FINAL"
+          TopLeft="32,605" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Foreach File In folder\UNION ALL"
+          TopLeft="108,695" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\Foreach File In folder\Update Log 1"
+          TopLeft="118,437" />
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Foreach File In folder\Update Staging to Initial for OKF"
+          TopLeft="52,134" />
+        <EdgeLayout
+          Id="Package\Foreach File In folder.PrecedenceConstraints[Constraint]"
+          TopLeft="169,275">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder.PrecedenceConstraints[Constraint 1]"
+          TopLeft="187.75,565">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder.PrecedenceConstraints[Constraint 1 1]"
+          TopLeft="169.5,176">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder.PrecedenceConstraints[Constraint 2]"
+          TopLeft="160.5,68">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10,66"
+              Start="0,0"
+              End="10,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29"
+                    Point2="0,33"
+                    Point3="4,33" />
+                  <mssgle:LineSegment
+                    End="6,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6,33"
+                    Point2="10,33"
+                    Point3="10,37" />
+                  <mssgle:LineSegment
+                    End="10,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder.PrecedenceConstraints[Constraint 3]"
+          TopLeft="186.5,647">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10,48"
+              Start="0,0"
+              End="-10,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="-4,24" />
+                  <mssgle:LineSegment
+                    End="-6,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6,24"
+                    Point2="-10,24"
+                    Point3="-10,28" />
+                  <mssgle:LineSegment
+                    End="-10,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder.PrecedenceConstraints[Constraint 7]"
+          TopLeft="169.5,386">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.5,51"
+              Start="0,0"
+              End="22.5,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.5"
+                    Point2="0,25.5"
+                    Point3="4,25.5" />
+                  <mssgle:LineSegment
+                    End="18.5,25.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,25.5"
+                    Point2="22.5,25.5"
+                    Point3="22.5,29.5" />
+                  <mssgle:LineSegment
+                    End="22.5,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder.PrecedenceConstraints[Constraint 8]"
+          TopLeft="190.5,479">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="793,792"
+          Size="793,835"
+          Id="Package\Foreach File In folder"
+          TopLeft="119.5,65" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach File In folder\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Foreach File In folder\Data Flow Task\Row Count"
+          TopLeft="346,284" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Foreach File In folder\Data Flow Task\Lookup"
+          TopLeft="206,198" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost"
+          TopLeft="352,397" />
+        <NodeLayout
+          Size="235,42"
+          Id="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging"
+          TopLeft="24,396" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Foreach File In folder\Data Flow Task\Data Conversion"
+          TopLeft="209,86" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Foreach File In folder\Data Flow Task\Excel Source"
+          TopLeft="215,17" />
+        <EdgeLayout
+          Id="Package\Foreach File In folder\Data Flow Task.Paths[Row Count Output 1]"
+          TopLeft="412.5,326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="35,71"
+              Start="0,0"
+              End="35,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5"
+                    Point2="0,35.5"
+                    Point3="4,35.5" />
+                  <mssgle:LineSegment
+                    End="31,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31,35.5"
+                    Point2="35,35.5"
+                    Point3="35,39.5" />
+                  <mssgle:LineSegment
+                    End="35,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder\Data Flow Task.Paths[Lookup No Match Output]"
+          TopLeft="311.333333333333,240">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101.166666666667,44"
+              Start="0,0"
+              End="101.166666666667,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.8613861386139" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.8613861386139"
+                    Point2="0,17.8613861386139"
+                    Point3="4,17.8613861386139" />
+                  <mssgle:LineSegment
+                    End="97.1666666666667,17.8613861386139" />
+                  <mssgle:CubicBezierSegment
+                    Point1="97.1666666666667,17.8613861386139"
+                    Point2="101.166666666667,17.8613861386139"
+                    Point3="101.166666666667,21.8613861386139" />
+                  <mssgle:LineSegment
+                    End="101.166666666667,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-5.22305338541666,22.8613861386139,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder\Data Flow Task.Paths[Lookup Match Output]"
+          TopLeft="260.666666666667,240">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-119.166666666667,156"
+              Start="0,0"
+              End="-119.166666666667,148.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.3267326732673" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.3267326732673"
+                    Point2="0,63.3267326732673"
+                    Point3="-4,63.3267326732673" />
+                  <mssgle:LineSegment
+                    End="-115.166666666667,63.3267326732673" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-115.166666666667,63.3267326732673"
+                    Point2="-119.166666666667,63.3267326732673"
+                    Point3="-119.166666666667,67.3267326732673" />
+                  <mssgle:LineSegment
+                    End="-119.166666666667,148.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-107.774720052083,68.3267326732673,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="288.25,59">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Insert"
+          ParentId="Package\Foreach File In folder\Data Flow Task"
+          FontInfo="{assembly:Null}"
+          Size="59,40"
+          Id="7e1ca33d-824f-4370-abf7-aadad6a0c751"
+          TopLeft="489,338" />
+        <AnnotationLayout
+          Text="Update"
+          ParentId="Package\Foreach File In folder\Data Flow Task"
+          FontInfo="{assembly:Null}"
+          Size="68,40"
+          Id="d1f830a0-2c56-4423-85dc-0d1956520f6a"
+          TopLeft="18,339" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Foreach File In folder\Data Flow Task\Conditional Split"
+          TopLeft="526,96" />
+        <EdgeLayout
+          Id="Package\Foreach File In folder\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="370,107">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="156,10"
+              Start="0,0"
+              End="148.5,10">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="74,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="74,0"
+                    Point2="78,0"
+                    Point3="78,4" />
+                  <mssgle:LineSegment
+                    End="78,6" />
+                  <mssgle:CubicBezierSegment
+                    Point1="78,6"
+                    Point2="78,10"
+                    Point3="82,10" />
+                  <mssgle:LineSegment
+                    End="148.5,10" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach File In folder\Data Flow Task.Paths[Has_data]"
+          TopLeft="605.5,138">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-319.5,60"
+              Start="0,0"
+              End="-319.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-315.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-315.5,30"
+                    Point2="-319.5,30"
+                    Point3="-319.5,34" />
+                  <mssgle:LineSegment
+                    End="-319.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-180.713359375,35,41.92671875,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach File In folder\Data Flow Task\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[I_AVG_COST]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach File In folder\Data Flow Task\Destination - Avg_Cost_Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach File In folder\Data Flow Task\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
